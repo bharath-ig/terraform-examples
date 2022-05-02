@@ -77,14 +77,14 @@ ingress_security_rules {
 ######################
 
     resource "oci_core_subnet" "terrasub" {
-      count               = length(data.oci_identity_availability_domains.ad1.availability_domains)
-      availability_domain = lookup(data.oci_identity_availability_domains.ad1.availability_domains[count.index], "name")
+#      count               = length(data.oci_identity_availability_domains.ad1.availability_domains)
+      availability_domain = lookup(data.oci_identity_availability_domains.ad1.availability_domains[0], "name")
      # cidr_block          = cidrsubnet(var.vcn_cidr, ceil(log(len527gth(data.oci_identity_availability_domains.ad1.availability_domains) * 2, 2)), count.index)
     #      display_name        = "Default Subnet ${lookup(data.oci_identity_availability_domains.ad1.availability_domains[count.index], "name")}"
       cidr_block     = var.subnet_cidr 
       display_name   = var.subnet_display_name
       prohibit_public_ip_on_vnic  = false
-      dns_label                   = "${var.subnet_dns_label}${count.index + 1}"
+      dns_label                   = "${var.subnet_dns_label}"
       compartment_id              = var.compartment_ocid
       vcn_id                      = oci_core_vcn.vcnterra.id
       route_table_id              = oci_core_default_route_table.rt.id
