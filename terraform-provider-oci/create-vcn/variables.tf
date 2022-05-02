@@ -8,7 +8,7 @@
     }
     
     variable "vcn_cidr" {
-      default = "192.168.64.0/20"
+      default = "10.0.0.0/16"
     }
 
     variable "vcn_dns_label" {
@@ -23,10 +23,11 @@
       }
 
     variable "subnet_cidr"{
-      default = "192.168.78.0/24"
-      }  
-    provider "oci" {
+      default = "10.0.1.0/24" 
+    }   
+ provider "oci" {
       tenancy_ocid     = var.tenancy_ocid
       region           = var.region
     }
+
   
